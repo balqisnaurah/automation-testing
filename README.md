@@ -1,6 +1,6 @@
 # Automation Testing dengan Pytest
 
-Automated testing untuk REST API menggunakan Python dan pytest framework. Mencakup pengujian operasi CRUD dengan terorganisir dalam test classes.
+Automated testing untuk REST API dan UI menggunakan Python, pytest framework, dan Selenium WebDriver. Mencakup pengujian operasi CRUD pada API dan interaksi UI pada web application.
 
 ---
 
@@ -8,7 +8,7 @@ Automated testing untuk REST API menggunakan Python dan pytest framework. Mencak
 
 ### `test_api.py`
 
-Test script utama yang berisi automation testing untuk JSONPlaceholder API.
+Test script untuk API testing menggunakan pytest dan library requests.
 
 **Test Suite yang Dibuat:**
 
@@ -23,7 +23,22 @@ Test script utama yang berisi automation testing untuk JSONPlaceholder API.
 
 ---
 
-## Jenis Pengujian
+### `test_ui_demo.py`
+
+Test script untuk UI automation testing menggunakan Selenium WebDriver. Menguji situs the-internet.herokuapp.com yang khusus disediakan untuk latihan automation testing.
+
+**Test Suite yang Dibuat:**
+
+| Test Class | Fungsi yang Diuji | Jumlah Test |
+|-----------|-------------------|-------------|
+| `TestLogin` | Login flow (valid, invalid, logout) | 5 |
+| `TestCheckboxes` | Interaksi dengan checkbox | 3 |
+| `TestDropdown` | Interaksi dengan dropdown | 2 |
+| **Total** | | **10** |
+
+---
+
+## Jenis Pengujian API (test_api.py)
 
 ### Test Class: TestGetUsers
 - Status code response harus 200 untuk request valid
@@ -52,6 +67,26 @@ Test script utama yang berisi automation testing untuk JSONPlaceholder API.
 
 ---
 
+## Jenis Pengujian UI (test_ui_demo.py)
+
+### Test Class: TestLogin
+- Halaman login berhasil dimuat
+- Login dengan kredensial valid berhasil dan menampilkan pesan sukses
+- Login dengan username salah menampilkan pesan error
+- Login dengan password salah menampilkan pesan error
+- Logout berhasil mengarahkan kembali ke halaman login
+
+### Test Class: TestCheckboxes
+- Halaman checkbox berhasil dimuat dengan 2 checkbox
+- Centang checkbox pertama berhasil
+- Hapus centang checkbox kedua berhasil
+
+### Test Class: TestDropdown
+- Halaman dropdown berhasil dimuat
+- Pemilihan opsi dari dropdown berhasil
+
+---
+
 ## Cara Menggunakan
 
 ### Prasyarat
@@ -60,31 +95,45 @@ Test script utama yang berisi automation testing untuk JSONPlaceholder API.
 pip install pytest selenium webdriver-manager requests
 ```
 
-### Menjalankan Test
+### Menjalankan Test API
 
 ```bash
 python -m pytest test_api.py -v
+```
+
+### Menjalankan Test UI
+
+```bash
+python -m pytest test_ui_demo.py -v
+```
+
+### Menjalankan Semua Test
+
+```bash
+python -m pytest -v
 ```
 
 ### Menjalankan Test Class Tertentu
 
 ```bash
 python -m pytest test_api.py::TestGetUsers -v
+python -m pytest test_ui_demo.py::TestLogin -v
 ```
 
 ### Menyimpan Hasil ke File
 
 ```bash
-python -m pytest test_api.py -v > test_results.txt 2>&1
+python -m pytest -v > test_results.txt 2>&1
 ```
 
 ---
 
-## API yang Diuji
+## API dan Situs yang Diuji
 
-**Base URL:** https://jsonplaceholder.typicode.com
-
-JSONPlaceholder adalah free fake REST API yang umum digunakan untuk testing dan prototyping.
+| Tipe Test | URL | Deskripsi |
+|-----------|-----|-----------|
+| API Testing | https://jsonplaceholder.typicode.com | Free fake REST API untuk testing |
+| UI Testing | https://the-internet.herokuapp.com | Situs latihan automation testing standar industri |
 
 ---
 
@@ -94,9 +143,9 @@ JSONPlaceholder adalah free fake REST API yang umum digunakan untuk testing dan 
 |-----------|--------|
 | Python 3 | Bahasa pemrograman utama |
 | pytest | Testing framework dengan fitur fixtures, assertions, dan reporting |
-| requests | Library untuk HTTP requests |
-| selenium | Library untuk browser automation (untuk pengembangan selanjutnya) |
-| webdriver-manager | Otomatis mengelola driver browser |
+| requests | Library untuk HTTP requests (API testing) |
+| selenium | Library untuk browser automation (UI testing) |
+| webdriver-manager | Otomatis mengelola Chrome driver |
 
 ---
 
@@ -104,7 +153,8 @@ JSONPlaceholder adalah free fake REST API yang umum digunakan untuk testing dan 
 
 ```
 automation-testing/
-├── test_api.py          # Script automation testing API
+├── test_api.py          # Automation testing API
+├── test_ui_demo.py      # Automation testing UI
 ├── test_results.txt     # Output hasil testing (opsional)
 └── README.md
 ```
@@ -113,4 +163,4 @@ automation-testing/
 
 ## Tentang
 
-Proyek ini dibuat sebagai bagian dari proses belajar Quality Assurance, khususnya dalam automation testing. Penggunaan test class membantu mengorganisir test berdasarkan fungsionalitas yang diuji, yang merupakan praktik standar dalam testing automation.
+Proyek ini dibuat sebagai bagian dari proses belajar Quality Assurance, khususnya dalam automation testing. Mencakup dua pendekatan automation yang umum di industri: API testing menggunakan pytest dengan library requests, dan UI testing menggunakan Selenium WebDriver. Penggunaan test class membantu mengorganisir test berdasarkan fungsionalitas yang diuji, yang merupakan praktik standar dalam testing automation.
